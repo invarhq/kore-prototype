@@ -14,7 +14,6 @@ use Pug\Pug;
 class TemplateProcessor implements TemplateProcessorInterface
 {
     protected $pug;
-    protected $baseDir;
 
     /**
      * TemplateProcessor constructor.
@@ -29,17 +28,6 @@ class TemplateProcessor implements TemplateProcessorInterface
             'locator_class_name' => get_class($locator),
             'get_file_contents' => $loader,
         ]);
-    }
-
-    /**
-     * @param string $baseDir
-     * @return $this|mixed
-     */
-    public function setBaseDir(string $baseDir)
-    {
-        $this->baseDir = $baseDir;
-
-        return $this;
     }
 
     /**
