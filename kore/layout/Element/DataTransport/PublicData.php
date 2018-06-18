@@ -5,8 +5,6 @@
  * terms of the MIT license.
  */
 
-/** {license_text}  */
-
 namespace Kore\Layout\Element\DataTransport;
 
 use Kore\Utils\Fluent;
