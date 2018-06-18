@@ -1,0 +1,16 @@
+---
+services:
+  # PUG elements
+  kore.layout_pug.element.html.template.frontend:
+    class: Kore\Layout\Element\Frontend\Html\HtmlTemplate
+    arguments:
+      - '@kore.layout_pug.element.template_processor'
+
+  kore.layout_pug.element.html.template:
+    class: Kore\Layout\Element\Element
+    public: true
+    arguments:
+      - '@kore.layout.element.default.backend'
+      - '@kore.layout_pug.element.html.template.frontend'
+    tags:
+      - { name: 'kore.layout.html.element', 'alias': 'pug_template'}

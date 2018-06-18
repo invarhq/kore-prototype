@@ -1,0 +1,16 @@
+---
+services:
+  kore.layout.element.head.backend:
+    class: Kore\Layout\Element\Backend\Document\Head
+
+  kore.layout.element.html.head.frontend:
+    class: Kore\Layout\Element\Frontend\Html\Document\Head
+
+  kore.layout.element.html.head:
+    class: Kore\Layout\Element\Element
+    public: true
+    arguments:
+      - '@kore.layout.element.head.backend'
+      - '@kore.layout.element.html.head.frontend'
+    tags:
+      - { name: 'kore.layout.html.element', 'alias': 'document_head'}

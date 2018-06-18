@@ -1,0 +1,59 @@
+---
+services:
+  kore.layout.element.template_filesystem_factory:
+    class: Kore\LayoutSymfonyBridge\Element\TemplateFilesystemFactory
+    arguments:
+      - '%kernel.root_dir%/view/template'
+
+  kore.layout.element.template_filesystem:
+    class: League\Flysystem\Filesystem
+    factory: ['@kore.layout.element.template_filesystem_factory', createFilesystem]
+
+  kore.layout.resource_resolver:
+    class: Kore\Layout\ResourceResolver
+
+  kore.layout.cache:
+    class: Kore\Utils\Cache\DummyCache
+
+  kore.layout.debug:
+    class: Kore\Utils\Debug\DummyDebug
+
+  kore.layout.config:
+    class: Kore\Layout\Config
+    public: true
+    arguments:
+      - '@kore.layout.cache'
+      - '@kore.layout.debug'
+    calls:
+     - [setSuppliers, [!tagged kore.layout.config.supplier]]
+
+  kore.layout.config.supplier:
+    class: Kore\LayoutSymfonyBridge\Config\Supplier
+    arguments:
+      - '%kernel.root_dir%/view/layout'
+    tags:
+      - 'kore.layout.config.supplier'
+
+  kore.layout.html.processor:
+    class: Kore\Layout\Processor\Processor
+    public: true
+    arguments:
+      - '@kore.layout.html.element.factory'
+      - '@kore.layout.debug'
+
+  kore.layout.json.processor:
+    class: Kore\Layout\Processor\Processor
+    public: true
+    arguments:
+      - '@kore.layout.json.element.factory'
+      - '@kore.layout.debug'
+
+  kore.layout.html.element.factory:
+    class: Kore\Layout\Element\Factory\Factory
+    arguments:
+      - '@service_container'
+
+  kore.layout.json.element.factory:
+    class: Kore\Layout\Element\Factory\Factory
+    arguments:
+      - '@service_container'

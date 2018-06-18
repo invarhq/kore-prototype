@@ -1,0 +1,13 @@
+---
+services:
+  # default element
+  kore.layout.element.json.default.frontend:
+    class: Kore\Layout\Element\Frontend\Json\JsonDefault
+  kore.layout.element.json.default:
+    class: Kore\Layout\Element\Element
+    public: true
+    arguments:
+      - '@kore.layout.element.default.backend'
+      - '@kore.layout.element.json.default.frontend'
+    tags:
+      - { name: 'kore.layout.json.element', 'alias': 'default'}

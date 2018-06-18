@@ -1,0 +1,27 @@
+---
+services:
+  # default element
+  kore.layout.element.html.default.frontend:
+    class: Kore\Layout\Element\Frontend\Html\HtmlDefault
+  kore.layout.element.html.default:
+    class: Kore\Layout\Element\Element
+    public: true
+    arguments:
+      - '@kore.layout.element.default.backend'
+      - '@kore.layout.element.html.default.frontend'
+    tags:
+      - { name: 'kore.layout.html.element', 'alias': 'default'}
+
+  # text element
+  kore.layout.element.text.backend:
+    class: Kore\Layout\Element\Backend\BackendText
+  kore.layout.element.html.text.frontend:
+    class: Kore\Layout\Element\Frontend\Html\HtmlText
+  kore.layout.element.html.text:
+      class: Kore\Layout\Element\Element
+      public: true
+      arguments:
+        - '@kore.layout.element.text.backend'
+        - '@kore.layout.element.html.text.frontend'
+      tags:
+        - { name: 'kore.layout.html.element', 'alias': 'text'}

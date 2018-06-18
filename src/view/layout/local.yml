@@ -1,0 +1,11 @@
+---
+default: # Default Handler - Will be applied to all pages
+  document: # Root Element
+    _type: pug_template
+    _template: default.pug
+    head:
+      _type: document_head
+      _title: The Demo Page
+    footer:
+      _type: pug_template
+      _template: footer.pug
