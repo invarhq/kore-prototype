@@ -59,17 +59,4 @@ class ElementData
     {
         return $this->children;
     }
-
-    /**
-     * @param array $map
-     * @return $this
-     */
-    public function privateToPublic(array $map)
-    {
-        foreach ($map as $key) {
-            $this->publicData[$key] = $this->privateData[$key];
-        }
-
-        return $this;
-    }
 }

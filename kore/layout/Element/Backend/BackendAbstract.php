@@ -7,6 +7,7 @@
 
 namespace Kore\Layout\Element\Backend;
 
+use Kore\Layout\Element\DataTransport\ElementData;
 use Kore\Layout\Element\Frontend\FrontendInterface;
 
 /**
@@ -40,5 +41,20 @@ abstract class BackendAbstract implements BackendInterface
     public function __toString()
     {
         return '';
+    }
+
+
+    /**
+     * @param ElementData $date
+     * @param iterable $map
+     * @return $this
+     */
+    protected function privateToPublic(ElementData $date, iterable $map)
+    {
+        foreach ($map as $key) {
+            $date->getPublicData()[$key] = $date->getPrivateData()[$key];
+        }
+
+        return $this;
     }
 }

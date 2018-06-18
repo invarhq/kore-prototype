@@ -23,7 +23,7 @@ class Head extends BackendAbstract
      */
     public function prepare(ElementData $data): BackendInterface
     {
-        $data->privateToPublic([
+        $this->privateToPublic($data, [
             'title',
         ]);
 
