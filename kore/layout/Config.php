@@ -55,7 +55,7 @@ class Config implements ConfigInterface
     }
 
     /**
-     * @param iterable|SupplierInterface[] $suppliers
+     * @param iterable|array|SupplierInterface[] $suppliers
      * @return $this
      * @throws ConfigException
      */

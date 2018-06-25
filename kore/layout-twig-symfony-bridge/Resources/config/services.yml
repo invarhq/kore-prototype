@@ -1,0 +1,19 @@
+---
+services:
+  kore.layout_twig.loader:
+    class: Twig\Loader\FilesystemLoader
+    arguments:
+      - '%kernel.root_dir%/view/template'
+
+  kore.layout_twig.environment:
+    class: Twig\Environment
+    arguments:
+      - '@kore.layout_twig.loader'
+
+  # Twig template processor
+  kore.layout_twig.element.template_processor:
+    class: Kore\Layout\Element\Template\Processor\ProcessorTwig
+    arguments:
+      - '@kore.layout_twig.environment'
+    tags:
+      - 'kore.layout.template.processor'

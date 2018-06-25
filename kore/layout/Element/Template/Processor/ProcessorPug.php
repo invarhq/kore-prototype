@@ -5,15 +5,26 @@
  * terms of the MIT license.
  */
 
-namespace Kore\LayoutPug;
+namespace Kore\Layout\Element\Template\Processor;
 
-use Kore\Layout\Element\TemplateProcessorInterface;
 use Kore\Utils\ServiceProxyAbstract;
 use Pug\Pug;
 
-class TemplateProcessor implements TemplateProcessorInterface
+/**
+ * Class ProcessorPug
+ * @package Kore\Layout\Element\Template\Processor
+ */
+class ProcessorPug implements ProcessorInterface
 {
     protected $pug;
+
+    /**
+     * @return array
+     */
+    public function getExtensionCodes(): array
+    {
+        return ['pug', 'jade'];
+    }
 
     /**
      * TemplateProcessor constructor.
@@ -39,5 +50,13 @@ class TemplateProcessor implements TemplateProcessorInterface
     public function processTemplate(string $template, iterable $vars = null): string
     {
         return $this->pug->renderFile($template, $vars ? $vars : []);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isJsCompatible(): bool
+    {
+        return true;
     }
 }

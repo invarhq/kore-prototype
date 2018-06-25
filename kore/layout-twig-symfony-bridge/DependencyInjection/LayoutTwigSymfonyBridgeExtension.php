@@ -6,7 +6,7 @@
  * terms of the MIT license.
  */
 
-namespace Kore\LayoutPugSymfonyBridge\DependencyInjection;
+namespace Kore\LayoutTwigSymfonyBridge\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,7 +17,7 @@ use Symfony\Component\Config\FileLocator;
  * Class LayoutPugSymfonyBridgeExtension
  * @package Kore\LayoutPugSymfonyBridge\DependencyInjection
  */
-class LayoutPugSymfonyBridgeExtension extends Extension
+class LayoutTwigSymfonyBridgeExtension extends Extension
 {
     /**
      * @param array $configs
@@ -26,7 +26,7 @@ class LayoutPugSymfonyBridgeExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
 }

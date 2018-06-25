@@ -7,7 +7,7 @@
 
 namespace Kore\Layout\Element\Frontend\Html;
 
-use Kore\Layout\Element\TemplateProcessorInterface;
+use Kore\Layout\Element\Template\ProcessorResolver\ProcessorResolverInterface;
 
 /**
  * Class HtmlText
@@ -16,15 +16,27 @@ use Kore\Layout\Element\TemplateProcessorInterface;
 class HtmlTemplate extends HtmlAbstract
 {
     protected $templateSource;
-    protected $templateProcessor;
+    protected $resolver;
 
     /**
      * HtmlTemplate constructor.
-     * @param TemplateProcessorInterface $processor
+     * @param ProcessorResolverInterface $resolver
      */
-    public function __construct(TemplateProcessorInterface $processor)
+    public function __construct(ProcessorResolverInterface $resolver)
     {
-        $this->templateProcessor = $processor;
+        $this->resolver = $resolver;
+    }
+
+    /**
+     * @return null|string
+     */
+    protected function getProcessorCode():?string
+    {
+        if ($processor = $this->getPrivateData('processor')) {
+            return $processor;
+        }
+
+        return pathinfo($this->getPrivateData('template'), PATHINFO_EXTENSION);
     }
 
     /**
@@ -32,7 +44,9 @@ class HtmlTemplate extends HtmlAbstract
      */
     public function toHtml():string
     {
-        return $this->templateProcessor->processTemplate(
+        $processor = $this->resolver->resolve($this->getProcessorCode());
+
+        return $processor->processTemplate(
             $this->getPrivateData('template'),
             array_merge($this->getChildResult()->toArray(), $this->toArray())
         );

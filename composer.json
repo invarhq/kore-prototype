@@ -31,9 +31,9 @@
             "App\\": "src/",
             "Kore\\Utils\\": "kore/utils",
             "Kore\\Layout\\": "kore/layout",
-            "Kore\\LayoutPug\\": "kore/layout-pug",
             "Kore\\LayoutSymfonyBridge\\": "kore/layout-symfony-bridge",
-            "Kore\\LayoutPugSymfonyBridge\\": "kore/layout-pug-symfony-bridge"
+            "Kore\\LayoutPugSymfonyBridge\\": "kore/layout-pug-symfony-bridge",
+            "Kore\\LayoutTwigSymfonyBridge\\": "kore/layout-twig-symfony-bridge"
         }
     },
     "autoload-dev": {

@@ -4,7 +4,7 @@ services:
   kore.layout_pug.template.locator:
     class: Kore\LayoutPugSymfonyBridge\TemplateLocator
     arguments:
-      - '@kore.layout.element.template_filesystem'
+      - '@kore.layout.element.template_filesystem_remote'
 
   kore.layout_pug.template.locator.proxy:
     class: Kore\LayoutPugSymfonyBridge\TemplateLocatorProxy
@@ -15,7 +15,7 @@ services:
   kore.layout_pug.template.loader:
     class: Kore\LayoutPugSymfonyBridge\TemplateLoader
     arguments:
-      - '@kore.layout.element.template_filesystem'
+      - '@kore.layout.element.template_filesystem_remote'
 
   kore.layout_pug.template.loader.proxy:
     class: Kore\LayoutPugSymfonyBridge\TemplateLoaderProxy
@@ -24,8 +24,10 @@ services:
 
   # PUG template processor
   kore.layout_pug.element.template_processor:
-    class: Kore\LayoutPug\TemplateProcessor
+    class: Kore\Layout\Element\Template\Processor\ProcessorPug
     arguments:
       - '@kore.layout_pug.template.locator.proxy'
       - '@kore.layout_pug.template.loader.proxy'
       - '%kernel.cache_dir%/template'
+    tags:
+      - 'kore.layout.template.processor'

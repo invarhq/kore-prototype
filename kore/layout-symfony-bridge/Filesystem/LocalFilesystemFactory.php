@@ -5,8 +5,9 @@
  * terms of the MIT license.
  */
 
-namespace Kore\LayoutSymfonyBridge\Element;
+namespace Kore\LayoutSymfonyBridge\Filesystem;
 
+use Kore\Utils\LocalFilesystem;
 use League\Flysystem\Adapter;
 use League\Flysystem\Filesystem;
 
@@ -14,17 +15,17 @@ use League\Flysystem\Filesystem;
  * Class TemplateFilesystemFactory
  * @package Kore\LayoutSymfonyBridge\Element
  */
-class TemplateFilesystemFactory
+class LocalFilesystemFactory
 {
     protected $baseDir;
 
     /**
      * TemplateFilesystemFactory constructor.
-     * @param string $templateDir
+     * @param string $baseDir
      */
-    public function __construct(string $templateDir)
+    public function __construct(string $baseDir)
     {
-        $this->baseDir = $templateDir;
+        $this->baseDir = $baseDir;
     }
 
     /**
@@ -34,6 +35,6 @@ class TemplateFilesystemFactory
     {
         $adapter = new Adapter\Local($this->baseDir);
 
-        return new Filesystem($adapter);
+        return new LocalFilesystem($adapter);
     }
 }

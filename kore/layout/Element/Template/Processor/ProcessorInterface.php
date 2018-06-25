@@ -5,15 +5,13 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element;
-
-use Kore\Layout\Element\DataTransport\Template;
+namespace Kore\Layout\Element\Template\Processor;
 
 /**
  * Interface TemplateSourceInterface
  * @package Kore\LayoutPug
  */
-interface TemplateProcessorInterface
+interface ProcessorInterface
 {
     /**
      * @param string $template
@@ -21,4 +19,14 @@ interface TemplateProcessorInterface
      * @return string
      */
     public function processTemplate(string $template, iterable $vars = null):string;
+
+    /**
+     * @return array
+     */
+    public function getExtensionCodes():array;
+
+    /**
+     * @return bool
+     */
+    public function isJsCompatible():bool;
 }

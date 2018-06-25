@@ -1,13 +1,36 @@
 ---
 services:
-  kore.layout.element.template_filesystem_factory:
-    class: Kore\LayoutSymfonyBridge\Element\TemplateFilesystemFactory
+  kore.layout.element.template_filesystem_remote_factory:
+    class: Kore\LayoutSymfonyBridge\Filesystem\LocalFilesystemFactory
     arguments:
       - '%kernel.root_dir%/view/template'
 
-  kore.layout.element.template_filesystem:
-    class: League\Flysystem\Filesystem
-    factory: ['@kore.layout.element.template_filesystem_factory', createFilesystem]
+  kore.layout.element.template_filesystem_local_factory:
+    class: Kore\LayoutSymfonyBridge\Filesystem\LocalFilesystemFactory
+    arguments:
+      - '%kernel.cache_dir%/view/template'
+
+  kore.layout.element.template_filesystem_remote:
+    class: Kore\Utils\LocalFilesystem
+    factory: ['@kore.layout.element.template_filesystem_remote_factory', createFilesystem]
+
+  kore.layout.element.template_filesystem_local:
+    class: Kore\Utils\LocalFilesystem
+    factory: ['@kore.layout.element.template_filesystem_local_factory', createFilesystem]
+
+  kore.layout.element.template_processor_resolver:
+      class: Kore\Layout\Element\Template\ProcessorResolver\ProcessorResolver
+      calls:
+       - [setProcessors, [!tagged kore.layout.template.processor]]
+
+  # PHTML template processor
+  kore.layout.element.template_processor.phtml:
+    class: Kore\Layout\Element\Template\Processor\ProcessorPhtml
+    arguments:
+      - '@kore.layout.element.template_filesystem_remote'
+      - '@kore.layout.element.template_filesystem_remote' # - '@kore.layout.element.template_filesystem_local'
+    tags:
+      - 'kore.layout.template.processor'
 
   kore.layout.resource_resolver:
     class: Kore\Layout\ResourceResolver
