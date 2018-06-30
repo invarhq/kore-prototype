@@ -41,6 +41,6 @@ class ResourceResolver implements ResourceResolverInterface
             }
         }
 
-        return null;
+        return $resource;
     }
 }

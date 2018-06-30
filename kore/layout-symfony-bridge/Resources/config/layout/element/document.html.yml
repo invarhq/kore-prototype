@@ -1,0 +1,18 @@
+---
+services:
+  kore.layout.element.document.backend:
+    class: Kore\Layout\Element\Backend\Document
+
+  kore.layout.element.html.document.frontend:
+    class: Kore\Layout\Element\Frontend\Html\Document
+    calls:
+     - [setResourceResolver, ['@kore.layout.resource_resolver']]
+
+  kore.layout.element.html.document:
+    class: Kore\Layout\Element\Element
+    public: true
+    arguments:
+      - '@kore.layout.element.document.backend'
+      - '@kore.layout.element.html.document.frontend'
+    tags:
+      - { name: 'kore.layout.html.element', 'alias': 'document'}

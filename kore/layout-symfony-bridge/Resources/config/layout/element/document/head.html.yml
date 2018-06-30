@@ -5,6 +5,8 @@ services:
 
   kore.layout.element.html.head.frontend:
     class: Kore\Layout\Element\Frontend\Html\Document\Head
+    calls:
+     - [setResourceResolver, ['@kore.layout.resource_resolver']]
 
   kore.layout.element.html.head:
     class: Kore\Layout\Element\Element

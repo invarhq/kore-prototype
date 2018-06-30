@@ -5,17 +5,11 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element\Backend\Document;
+namespace Kore\Layout\Element\Backend;
 
-use Kore\Layout\Element\Backend\BackendAbstract;
-use Kore\Layout\Element\Backend\BackendInterface;
 use Kore\Layout\Element\DataTransport\ElementData;
 
-/**
- * Class BackendDefault
- * @package Kore\Layout\Element\Backend
- */
-class Head extends BackendAbstract
+class Document extends BackendAbstract
 {
     /**
      * @param ElementData $data

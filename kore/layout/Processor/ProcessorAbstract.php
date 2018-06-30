@@ -20,6 +20,7 @@ use Kore\Layout\Element\Factory\FactoryInterface;
 abstract class ProcessorAbstract implements ProcessorInterface
 {
     const DEFAULT_ROOT_ELEMENT_NAME = 'root';
+
     /** @var  FactoryInterface */
     protected $factory;
     /** @var array */
@@ -233,10 +234,12 @@ abstract class ProcessorAbstract implements ProcessorInterface
     public function process(ConfigInterface $layoutConfig)
     {
         $this->debug->startDebugMeasure('layout_render', 'Time for rendering layout');
-
+        $result = [];
         $config = $layoutConfig->toArray();
         if (!empty($config)) {
-            $elementsConfig = [self::DEFAULT_ROOT_ELEMENT_NAME => $config];
+            $elementsConfig = [
+                self::DEFAULT_ROOT_ELEMENT_NAME => $config
+            ];
 
             $this->sortElements($elementsConfig);
             $this->prepareBackend($elementsConfig);

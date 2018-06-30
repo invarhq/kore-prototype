@@ -1,11 +1,15 @@
 ---
 default: # Default Handler - Will be applied to all pages
   document: # Root Element
-    _type: template
-    _template: default.pug
-    head:
-      _type: document_head
-      _title: The Demo Page
+    _type: document
+    _title: 'The Demo Page'
+    _scripts:
+      - '/build/app.js'
+    _styles:
+      - '/build/appCss.css'
+    content:
+      _type: template
+      _template: content.pug
     footer:
       _type: template
       _template: footer.phtml
