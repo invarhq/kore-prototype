@@ -16,3 +16,9 @@ default: # Default Handler - Will be applied to all pages
       copyright:
         _type: template
         _template: copyright.twig
+
+contacts:
+  document:
+    content:
+      _type: template
+      _template: contacts.pug
