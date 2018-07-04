@@ -1,0 +1,7 @@
+---
+document:
+  content:
+    top:
+      _before: main
+      _type: text
+      _text: :D

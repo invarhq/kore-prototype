@@ -11,12 +11,12 @@ namespace Kore\Layout;
  * Interface ResourceResolverInterface
  * @package Kore\Layout
  */
-interface ResourceResolverInterface extends ResourceSupplierInterface
+interface AssetSupplierInterface
 {
-
     /**
-     * @param ResourceSupplierInterface $supplier
-     * @return mixed
+     * @param string $resource
+     * @param array $options
+     * @return null|string
      */
-    public function addSupplier(ResourceSupplierInterface $supplier);
+    public function resolveAssetUri(string $resource, array $options = []): ?string;
 }

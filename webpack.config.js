@@ -9,7 +9,7 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
 
     // uncomment to create hashed filenames (e.g. app.abc123.css)
-    // .enableVersioning(Encore.isProduction())
+    .enableVersioning(Encore.isProduction())
 
     // will create public/build/app.js and public/build/app.css
     .addEntry('app', './assets/js/app.js')

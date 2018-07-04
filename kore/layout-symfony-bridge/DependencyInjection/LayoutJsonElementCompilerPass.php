@@ -21,13 +21,13 @@ class LayoutJsonElementCompilerPass implements CompilerPassInterface
             return;
         }
 
-        $definition = $container->findDefinition('kore.layout.json.element.factory');
+        $factoryDefinition = $container->findDefinition('kore.layout.json.element.factory');
 
         $taggedServices = $container->findTaggedServiceIds('kore.layout.json.element');
 
         foreach ($taggedServices as $serviceId => $tags) {
             foreach ($tags as $attributes) {
-                $definition->addMethodCall('registerElementType', [
+                $factoryDefinition->addMethodCall('registerElementType', [
                         $attributes["alias"],
                         $serviceId,
                 ]);

@@ -10,7 +10,7 @@ namespace Kore\Layout\Element\Frontend\Html;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
-use Kore\Layout\ResourceResolverInterface;
+use Kore\Layout\AssetResolverInterface;
 
 /**
  * Class HtmlDefault
@@ -43,17 +43,6 @@ class Document extends HtmlAbstract
         $this->append($this->html);
         $this->append($this->head, $this->html);
         $this->append($this->body, $this->html);
-    }
-
-    /**
-     * @param ResourceResolverInterface $resolver
-     * @return $this
-     */
-    public function setResourceResolver(ResourceResolverInterface $resolver)
-    {
-        $this->resourceResolver = $resolver;
-
-        return $this;
     }
 
 
@@ -117,14 +106,14 @@ class Document extends HtmlAbstract
         foreach ($scripts as $scriptValue) {
             $script = $this->createElement('script');
             if (!is_array($scriptValue) && strlen($scriptValue) > 0) {
-                $script->setAttribute('src', $this->resourceResolver->resolveResourceUri($scriptValue));
+                $script->setAttribute('src', $this->assetResolver->resolveAssetUri($scriptValue));
             } else {
                 foreach ($scriptValue as $key => $value) {
                     if ('content' == $key) {
                         $script->nodeValue = '//<![CDATA[' . PHP_EOL . $value . PHP_EOL . '//]]>';
                     } else {
                         if ('src' == $key) {
-                            $script->setAttribute($key, $this->resourceResolver->resolveResourceUri($value));
+                            $script->setAttribute($key, $this->assetResolver->resolveAssetUri($value));
                         } else {
                             $script->setAttribute($key, $this->escapeHtml($value));
                         }
@@ -162,7 +151,7 @@ class Document extends HtmlAbstract
             if (is_array($styleValue) && isset($styleValue['href'])) {
                 foreach ($styleValue as $key => $value) {
                     if ('href' == $key) {
-                        $link->setAttribute($key, $this->resourceResolver->resolveResourceUri($value));
+                        $link->setAttribute($key, $this->assetResolver->resolveAssetUri($value));
                     } else {
                         $link->setAttribute($key, $this->escapeHtml($value));
                     }

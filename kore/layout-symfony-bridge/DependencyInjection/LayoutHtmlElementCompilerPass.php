@@ -7,7 +7,7 @@
 
 namespace Kore\LayoutSymfonyBridge\DependencyInjection;
 
-use Kore\Layout\Element\Frontend\ResourceAwareInterface;
+use Kore\Layout\Element\Frontend\AssetAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use ReflectionClass;
@@ -38,9 +38,9 @@ class LayoutHtmlElementCompilerPass implements CompilerPassInterface
 
             $definition = $container->findDefinition($serviceId);
             $reflection = new ReflectionClass($definition->getClass());
-            if ($reflection->implementsInterface(ResourceAwareInterface::class)) {
-                $definition->addMethodCall('setResourceResolver', [
-                    'kore.layout.resource_resolver',
+            if ($reflection->implementsInterface(AssetAwareInterface::class)) {
+                $definition->addMethodCall('setAssetResolver', [
+                    'kore.layout.asset.resolver',
                 ]);
             }
         }

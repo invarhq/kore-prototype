@@ -8,48 +8,37 @@
 namespace Kore\Layout\Element\Frontend\Html;
 
 use Kore\Layout\Element\Frontend\FrontendAbstract;
-use Kore\Layout\Element\Frontend\ResourceAwareInterface;
-use Kore\Layout\ResourceResolverInterface;
+use Kore\Layout\Element\Frontend\AssetAwareInterface;
+use Kore\Layout\AssetResolverInterface;
 use Kore\Utils\Htmlable;
 
 /**
  * Class HtmlAbstract
  * @package Kore\Layout\Element\Frontend\Html
  */
-abstract class HtmlAbstract extends FrontendAbstract implements Htmlable, ResourceAwareInterface
+abstract class HtmlAbstract extends FrontendAbstract implements Htmlable, AssetAwareInterface
 {
-    /** @var ResourceResolverInterface */
-    protected $resourceResolver;
+    /** @var AssetResolverInterface */
+    protected $assetResolver;
 
     /**
-     * @param ResourceResolverInterface $resolver
+     * @param AssetResolverInterface $resolver
      * @return $this
      */
-    public function setResourceResolver(ResourceResolverInterface $resolver)
+    public function setAssetResolver(AssetResolverInterface $resolver)
     {
-        $this->resourceResolver = $resolver;
+        $this->assetResolver = $resolver;
 
         return $this;
     }
-//
-//
-//    /**
-//     * @param $path
-//     * @param array $params
-//     * @return string
-//     */
-//    public function getUrl($path, array $params = [])
-//    {
-//        return $this->frontend->getUrl($path, $params);
-//    }
 
     /**
      * @param $resourcePath
      * @return string
      */
-    public function getResourceUrl($resourcePath)
+    public function getAssetUrl($resourcePath)
     {
-        return $this->resourceResolver->resolveResourceUri($resourcePath);
+        return $this->assetResolver->resolveAssetUri($resourcePath);
     }
 
     /**
@@ -62,11 +51,11 @@ abstract class HtmlAbstract extends FrontendAbstract implements Htmlable, Resour
     }
 
     /**
-     * @return string
+     * @throws \Exception
      */
     public function getCsrfToken()
     {
-        throw new Exception('Method not implemented');
+        throw new \Exception('Method not implemented');
     }
 
     /**

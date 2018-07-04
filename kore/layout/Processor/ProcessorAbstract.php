@@ -84,13 +84,15 @@ abstract class ProcessorAbstract implements ProcessorInterface
      * @param array $elements
      * @return array
      */
-    protected function sortElements(array &$elements)
+    protected function sortElementsRecursive(array $elements)
     {
         $offset = 0;
         while (false !== ($data = current($elements))) {
+            if (!is_array($data)) {
+                continue;
+            }
             $key   = key($elements);
             $reset = false;
-
             if (isset($data['_before']) && ($target = $data['_before'])) {
                 unset($data['_before'], $data['_after']);
                 if ('*' == $target) {
@@ -241,7 +243,7 @@ abstract class ProcessorAbstract implements ProcessorInterface
                 self::DEFAULT_ROOT_ELEMENT_NAME => $config
             ];
 
-            $this->sortElements($elementsConfig);
+            $this->sortElementsRecursive($elementsConfig);
             $this->prepareBackend($elementsConfig);
             $this->processBackend($elementsConfig);
             $result = $this->processFrontend($elementsConfig);

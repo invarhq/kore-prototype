@@ -7,17 +7,17 @@
 
 namespace Kore\Layout\Element\Frontend;
 
-use Kore\Layout\ResourceResolverInterface;
+use Kore\Layout\AssetResolverInterface;
 
 /**
  * Interface ResourceAwareInterface
  * @package Kore\Layout\Element\Frontend
  */
-interface ResourceAwareInterface
+interface AssetAwareInterface
 {
     /**
-     * @param ResourceResolverInterface $resolver
+     * @param AssetResolverInterface $resolver
      * @return mixed
      */
-    public function setResourceResolver(ResourceResolverInterface $resolver);
+    public function setAssetResolver(AssetResolverInterface $resolver);
 }

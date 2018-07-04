@@ -32,8 +32,17 @@ services:
     tags:
       - 'kore.layout.template.processor'
 
-  kore.layout.resource_resolver:
-    class: Kore\Layout\ResourceResolver
+  kore.layout.asset.resolver:
+    class: Kore\Layout\AssetResolver
+    calls:
+      - [setSuppliers, [!tagged kore.layout.asset.supplier]]
+
+  kore.layout.asset.supplier:
+    class: Kore\LayoutSymfonyBridge\Asset\Supplier
+    arguments:
+      - '%assets%'
+    tags:
+      - kore.layout.asset.supplier
 
   kore.layout.cache:
     class: Kore\Utils\Cache\DummyCache
@@ -48,7 +57,7 @@ services:
       - '@kore.layout.cache'
       - '@kore.layout.debug'
     calls:
-     - [setSuppliers, [!tagged kore.layout.config.supplier]]
+      - [setSuppliers, [!tagged kore.layout.config.supplier]]
 
   kore.layout.config.supplier:
     class: Kore\LayoutSymfonyBridge\Config\Supplier

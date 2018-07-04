@@ -1,0 +1,18 @@
+---
+document: # Root Element
+  _type: document
+  _title: 'The Demo Page'
+  _scripts:
+    - 'build/app.js'
+  _styles:
+    - 'build/appCss.css'
+  content:
+    main:
+      _type: template
+      _template: content.pug
+  footer:
+    _type: template
+    _template: footer.phtml
+    copyright:
+      _type: template
+      _template: copyright.twig

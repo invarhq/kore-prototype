@@ -9,6 +9,8 @@ namespace Kore\LayoutSymfonyBridge\Config;
 
 use Kore\Layout\Config\SupplierInterface;
 use Symfony\Component\Yaml\Parser;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 
 /**
  * Class Provider
@@ -34,6 +36,21 @@ class Supplier implements SupplierInterface
      */
     public function getConfig():array
     {
-        return $this->parser->parseFile("{$this->directory}/local.yml");
+        $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->directory));
+        $basePathLen = strlen($this->directory);
+
+        $config = [];
+
+        /** @var \SplFileInfo $file */
+        foreach ($rii as $file) {
+            if ($file->isDir()) {
+                continue;
+            }
+            $handle = ltrim(substr(substr($file->getPathname(), 0, strlen($file->getPathname())-4), $basePathLen), '/');
+            $handle = str_replace(DIRECTORY_SEPARATOR, '_', $handle);
+            $config[$handle] = $this->parser->parseFile($file->getPathname());
+        }
+
+        return $config;
     }
 }

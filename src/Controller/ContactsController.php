@@ -22,7 +22,7 @@ class ContactsController extends ControllerAbstract
     public function index()
     {
         $layoutConfig = $this->get('kore.layout.config');
-        $layoutConfig->load(['contacts']);
+        $layoutConfig->load(['catalog_product_view']);
 
         $processor = $this->get('kore.layout.html.processor');
 
