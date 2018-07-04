@@ -5,6 +5,8 @@ services:
 
   kore.layout.element.html.document.frontend:
     class: Kore\Layout\Element\Frontend\Html\Document
+    calls:
+     - ['setAssetResolver', ['@kore.layout.asset.resolver']]
 
   kore.layout.element.html.document:
     class: Kore\Layout\Element\Element

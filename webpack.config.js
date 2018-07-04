@@ -12,8 +12,8 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     // will create public/build/app.js and public/build/app.css
-    .addEntry('app', './assets/js/app.js')
-    .addStyleEntry('appCss', './assets/css/app.css')
+    .addEntry('app', './src/view/assets/js/app.js')
+    .addStyleEntry('appCss', './src/view/assets/css/app.css')
     .enableVueLoader()
 
     // uncomment to define the assets of the project

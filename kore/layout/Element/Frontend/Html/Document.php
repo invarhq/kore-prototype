@@ -16,10 +16,8 @@ use Kore\Layout\AssetResolverInterface;
  * Class HtmlDefault
  * @package Kore\Layout\Element\Frontend\Html
  */
-class Document extends HtmlAbstract
+class Document extends DomAbstract
 {
-    /** @var DOMDocument */
-    protected $dom;
     /** @var DOMNode */
     protected $html;
     /** @var DOMNode */
@@ -32,9 +30,7 @@ class Document extends HtmlAbstract
      */
     public function __construct()
     {
-        $this->dom = new DOMDocument();
-        $this->dom->preserveWhiteSpace = false;
-        $this->dom->formatOutput = true;
+        parent::__construct();
 
         $this->html = $this->createElement('html');
         $this->head = $this->createElement('head');
@@ -45,26 +41,6 @@ class Document extends HtmlAbstract
         $this->append($this->body, $this->html);
     }
 
-
-    /**
-     * @param string $name
-     * @return DOMElement
-     */
-    protected function createElement(string $name)
-    {
-        return $this->dom->createElement($name);
-    }
-
-    /**
-     * @param DOMNode $element
-     * @param DOMNode|null $parent
-     */
-    protected function append(DOMNode $element, DOMNode $parent = null)
-    {
-        $parent = $parent ?: $this->dom;
-        $parent->appendChild($element);
-        $parent->appendChild($this->dom->createTextNode("\n"));
-    }
     /**
      * Initialize page title tag
      */
