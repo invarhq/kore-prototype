@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as ControllerAbstract;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Psr\Container\ContainerInterface;
 
@@ -22,10 +23,10 @@ class ContactsController extends ControllerAbstract
     public function index()
     {
         $layoutConfig = $this->get('kore.layout.config');
-        $layoutConfig->load(['catalog_product_view']);
+        $layoutConfig->load(['contacts']);
 
-        $processor = $this->get('kore.layout.html.processor');
+        $processor = $this->get('kore.layout.json.processor');
 
-        return new Response($processor->process($layoutConfig));
+        return new JsonResponse($processor->process($layoutConfig));
     }
 }
