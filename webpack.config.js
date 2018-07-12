@@ -27,4 +27,6 @@ Encore
     // .autoProvidejQuery()
 ;
 
+
+
 module.exports = Encore.getWebpackConfig();
