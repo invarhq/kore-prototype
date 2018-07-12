@@ -5,15 +5,15 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element\Frontend\Html;
+namespace Kore\Layout\Element\Frontend;
 
 use Kore\Layout\Element\Template\ProcessorResolver\ProcessorResolverInterface;
 
 /**
  * Class HtmlText
- * @package Kore\Layout\Element\Frontend\Html
+ * @package Kore\Layout\Element\Frontend
  */
-class HtmlTemplate extends HtmlAbstract
+class Template extends HtmlAbstract
 {
     protected $templateSource;
     protected $resolver;
@@ -48,7 +48,7 @@ class HtmlTemplate extends HtmlAbstract
 
         return $processor->processTemplate(
             $this->getPrivateData('template'),
-            array_merge($this->getChildResult()->toArray(), $this->toArray())
+            $this->toArray()
         );
     }
 }

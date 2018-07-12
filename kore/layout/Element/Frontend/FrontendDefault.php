@@ -5,13 +5,13 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element\Frontend\Html;
+namespace Kore\Layout\Element\Frontend;
 
 /**
- * Class HtmlDefault
- * @package Kore\Layout\Element\Frontend\Html
+ * Class
+ * @package Kore\Layout\Element\Frontend
  */
-class HtmlDefault extends HtmlAbstract
+class FrontendDefault extends HtmlAbstract
 {
     /**
      * @return mixed|string

@@ -7,8 +7,9 @@
 
 namespace Kore\Layout\Processor;
 
+use Kore\Layout\Element\Backend\BackendInterface;
 use Kore\Layout\Element\DataTransport\ElementData;
-use Kore\Layout\Element\ElementInterface;
+use Kore\Layout\Element\Frontend\FrontendInterface;
 use Kore\Utils\Debug\DebugInterface;
 use Kore\Layout\ConfigInterface;
 use Kore\Layout\Element\Factory\FactoryInterface;
@@ -24,7 +25,7 @@ abstract class ProcessorAbstract implements ProcessorInterface
     /** @var  FactoryInterface */
     protected $factory;
     /** @var array */
-    protected $dataRregistry = [];
+    protected $dataRegistry = [];
     /** @var  DebugInterface */
     protected $debug;
 
@@ -135,11 +136,20 @@ abstract class ProcessorAbstract implements ProcessorInterface
 
     /**
      * @param ElementData $data
-     * @return ElementInterface
+     * @return BackendInterface
      */
-    protected function getElement(ElementData $data)
+    protected function getBackend(ElementData $data): BackendInterface
     {
-        return $this->factory->getElement($data->getPrivateData()['type'] ?: 'default');
+        return $this->factory->getBackendService($data->getPrivateData()['type'] ?: 'default');
+    }
+
+    /**
+     * @param ElementData $data
+     * @return FrontendInterface
+     */
+    protected function getFrontend(ElementData $data): FrontendInterface
+    {
+        return $this->factory->getFrontendService($data->getPrivateData()['type'] ?: 'default');
     }
 
     /**
@@ -148,11 +158,11 @@ abstract class ProcessorAbstract implements ProcessorInterface
      */
     protected function getElementData(string $elementPath)
     {
-        if (!isset($this->dataRregistry[$elementPath])) {
-            $this->dataRregistry[$elementPath] = new ElementData($elementPath);
+        if (!isset($this->dataRegistry[$elementPath])) {
+            $this->dataRegistry[$elementPath] = new ElementData($elementPath);
         }
 
-        return $this->dataRregistry[$elementPath];
+        return $this->dataRegistry[$elementPath];
     }
 
     /**
@@ -177,7 +187,7 @@ abstract class ProcessorAbstract implements ProcessorInterface
 
             $elementData = $this->getElementData($elementPath);
             $elementData->getPrivateData()->setData($privateData);
-            $backend = $this->getElement($elementData)->getBackend();
+            $backend = $this->getBackend($elementData);
             $backend->prepare($elementData);
         }
 
@@ -199,12 +209,19 @@ abstract class ProcessorAbstract implements ProcessorInterface
                 }
             }
             $elementData = $this->getElementData($elementPath);
-            $backend = $this->getElement($elementData)->getBackend();
+            $backend = $this->getBackend($elementData);
             $backend->process($elementData);
         }
 
         return $this;
     }
+
+    /**
+     * @param FrontendInterface $frontend
+     * @param ElementData $elementData
+     * @return mixed
+     */
+    abstract protected function processFrontendOutput(FrontendInterface $frontend, ElementData $elementData);
 
     /**
      * @param array $elements
@@ -221,7 +238,7 @@ abstract class ProcessorAbstract implements ProcessorInterface
                 $elementData->getChildren()->concat($this->processFrontend($elementsConfig, $elementPath));
             }
 
-            $result[$elementName] = $this->getElement($elementData)->getFrontend()->process($elementData);
+            $result[$elementName] = $this->processFrontendOutput($this->getFrontend($elementData), $elementData);
         }
 
         return $result;

@@ -1,7 +1,0 @@
----
-imports:
-  - { resource: element/default.yml }
-  - { resource: element/default.html.yml }
-  - { resource: element/default.json.yml }
-  - { resource: element/document.html.yml }
-  - { resource: element/vue_component.html.yml }

@@ -5,18 +5,15 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element\Frontend\Html;
+namespace Kore\Layout\Element\Frontend;
 
-use Kore\Layout\Element\Frontend\FrontendAbstract;
-use Kore\Layout\Element\Frontend\AssetAwareInterface;
 use Kore\Layout\AssetResolverInterface;
-use Kore\Utils\Htmlable;
 
 /**
  * Class HtmlAbstract
- * @package Kore\Layout\Element\Frontend\Html
+ * @package Kore\Layout\Element\Frontend
  */
-abstract class HtmlAbstract extends FrontendAbstract implements Htmlable, AssetAwareInterface
+abstract class HtmlAbstract extends FrontendAbstract implements FrontendAssetAwareInterface
 {
     /** @var AssetResolverInterface */
     protected $assetResolver;

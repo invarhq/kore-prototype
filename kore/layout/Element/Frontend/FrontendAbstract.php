@@ -61,20 +61,23 @@ abstract class FrontendAbstract implements FrontendInterface
     }
 
     /**
-     * @return mixed
-     */
-    abstract protected function processOutput();
-
-    /**
      * @param ElementData $data
-     * @return mixed
+     * @return FrontendInterface
      */
-    final public function process(ElementData $data)
+    public function setElementData(ElementData $data):FrontendInterface
     {
         $this->privateData    = $data->getPrivateData();
         $this->data           = $data->getPublicData();
         $this->childrenResult = $data->getChildren();
 
-        return $this->processOutput();
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return $this->prepareArray(array_merge($this->data->toArray(), $this->getChildResult()->toArray()));
     }
 }

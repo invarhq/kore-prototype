@@ -5,7 +5,7 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element\Frontend\Html;
+namespace Kore\Layout\Element\Frontend;
 
 use DOMDocument;
 use DOMElement;
@@ -14,7 +14,7 @@ use Kore\Layout\AssetResolverInterface;
 
 /**
  * Class HtmlDefault
- * @package Kore\Layout\Element\Frontend\Html
+ * @package Kore\Layout\Element\Frontend
  */
 class VueComponent extends DomAbstract
 {

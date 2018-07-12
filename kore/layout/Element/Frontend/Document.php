@@ -5,16 +5,13 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element\Frontend\Html;
+namespace Kore\Layout\Element\Frontend;
 
-use DOMDocument;
-use DOMElement;
 use DOMNode;
-use Kore\Layout\AssetResolverInterface;
 
 /**
  * Class HtmlDefault
- * @package Kore\Layout\Element\Frontend\Html
+ * @package Kore\Layout\Element\Frontend
  */
 class Document extends DomAbstract
 {

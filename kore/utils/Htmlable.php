@@ -18,5 +18,5 @@ interface Htmlable
      *
      * @return string
      */
-    public function toHtml():string;
+    public function toHtml(): string;
 }

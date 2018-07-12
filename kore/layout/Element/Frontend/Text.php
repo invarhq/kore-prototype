@@ -7,17 +7,17 @@
 
 namespace Kore\Layout\Element\Frontend;
 
-use Kore\Layout\AssetResolverInterface;
-
 /**
- * Interface ResourceAwareInterface
+ * Class HtmlText
  * @package Kore\Layout\Element\Frontend
  */
-interface AssetAwareInterface
+class Text extends HtmlAbstract
 {
     /**
-     * @param AssetResolverInterface $resolver
-     * @return mixed
+     * @return string
      */
-    public function setAssetResolver(AssetResolverInterface $resolver);
+    public function toHtml():string
+    {
+        return (string) $this['text'];
+    }
 }

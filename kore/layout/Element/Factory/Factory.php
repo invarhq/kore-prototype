@@ -7,7 +7,9 @@
 
 namespace Kore\Layout\Element\Factory;
 
+use Kore\Layout\Element\Backend\BackendInterface;
 use Kore\Layout\Element\ElementInterface;
+use Kore\Layout\Element\Frontend\FrontendInterface;
 use \Psr\Container\ContainerInterface;
 
 /**
@@ -17,7 +19,8 @@ use \Psr\Container\ContainerInterface;
 class Factory implements FactoryInterface
 {
     protected $diContainer;
-    protected $registry = [];
+    protected $frontendRegistry = [];
+    protected $backendRegistry = [];
 
     /**
      * FactoryAbstract constructor.
@@ -28,35 +31,65 @@ class Factory implements FactoryInterface
         $this->diContainer = $container;
     }
 
-    public function registerElementType(string $alias, string $serviceId): FactoryInterface
+    /**
+     * @param string $alias
+     * @param string $backendSvcId
+     * @param string $frontendSvcId
+     * @return FactoryInterface
+     */
+    public function registerElementService(string $alias, string $backendSvcId, string $frontendSvcId): FactoryInterface
     {
-        $this->registry[$alias] = $serviceId;
+        $this->backendRegistry[$alias] = $backendSvcId;
+        $this->frontendRegistry[$alias] = $frontendSvcId;
 
         return $this;
     }
 
-
     /**
      * @param string $alias
-     * @return ElementInterface
+     * @return FrontendInterface
      * @throws FactoryException
      */
-    public function getElement(string $alias):ElementInterface
+    public function getFrontendService(string $alias): FrontendInterface
     {
-        $element = null;
-        if (isset($this->registry[$alias])) {
-            $element = $this->diContainer->get($this->registry[$alias]);
-            if (!$element instanceof ElementInterface) {
+        $service = null;
+        if (isset($this->frontendRegistry[$alias])) {
+            $service = $this->diContainer->get($this->frontendRegistry[$alias]);
+            if (!$service instanceof FrontendInterface) {
                 throw new FactoryException(
-                    sprintf("The layout element must implement the %s", ElementInterface::class)
+                    sprintf("The frontend service must implement the %s", FrontendInterface::class)
                 );
             }
         } else {
             throw new FactoryException(
-                sprintf("The layout element '%s' wasn't registered", $alias)
+                sprintf("The frontend service for '%s' wasn't registered", $alias)
             );
         }
 
-        return $element;
+        return $service;
+    }
+
+    /**
+     * @param string $alias
+     * @return BackendInterface
+     * @throws FactoryException
+     */
+    public function getBackendService(string $alias): BackendInterface
+    {
+        $service = null;
+        if (isset($this->backendRegistry[$alias])) {
+            $service = $this->diContainer->get($this->backendRegistry[$alias]);
+            if (!$service instanceof BackendInterface) {
+                throw new FactoryException(
+                    sprintf("The backend service must implement the %s", BackendInterface::class)
+                );
+            }
+        } else {
+            throw new FactoryException(
+                sprintf("The backend service for '%s' wasn't registered", $alias)
+            );
+        }
+
+        return $service;
     }
 }

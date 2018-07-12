@@ -1,0 +1,43 @@
+---
+elements:
+  default:
+    backend:
+      class: Kore\Layout\Element\Backend\BackendDefault
+    frontend:
+      class: Kore\Layout\Element\Frontend\FrontendDefault
+
+  text:
+    backend:
+      class: Kore\Layout\Element\Backend\BackendText
+    frontend:
+      class: Kore\Layout\Element\Frontend\Text
+      arguments:
+        - '@kore.layout.element.template_processor_resolver'
+
+  template:
+    backend:
+      class: Kore\Layout\Element\Backend\BackendDefault
+    frontend:
+      class: Kore\Layout\Element\Frontend\Template
+      arguments:
+        - '@kore.layout.element.template_processor_resolver'
+
+  document:
+    backend:
+      class: Kore\Layout\Element\Backend\Document
+    frontend:
+      class: Kore\Layout\Element\Frontend\Document
+      arguments:
+        - '@kore.layout.element.template_processor_resolver'
+      calls:
+        - ['setAssetResolver', ['@kore.layout.asset.resolver']]
+
+  vue_component:
+    backend:
+      class: Kore\Layout\Element\Backend\VueComponent
+    frontend:
+      class: Kore\Layout\Element\Frontend\VueComponent
+      arguments:
+        - '@kore.layout.element.template_processor_resolver'
+      calls:
+        - ['setAssetResolver', ['@kore.layout.asset.resolver']]

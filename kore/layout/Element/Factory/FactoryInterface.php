@@ -7,7 +7,9 @@
 
 namespace Kore\Layout\Element\Factory;
 
+use Kore\Layout\Element\Backend\BackendInterface;
 use Kore\Layout\Element\ElementInterface;
+use Kore\Layout\Element\Frontend\FrontendInterface;
 
 /**
  * Interface FactoryInterface
@@ -17,15 +19,21 @@ interface FactoryInterface
 {
     /**
      * @param string $alias
-     * @param string $serviceId
+     * @param string $backendSvcId
+     * @param string $frontendSvcId
      * @return FactoryInterface
      */
-    public function registerElementType(string $alias, string $serviceId):FactoryInterface;
-
+    public function registerElementService(string $alias, string $backendSvcId, string $frontendSvcId):FactoryInterface;
 
     /**
      * @param string $alias
-     * @return ElementInterface
+     * @return BackendInterface
      */
-    public function getElement(string $alias):ElementInterface;
+    public function getBackendService(string $alias):BackendInterface;
+
+    /**
+     * @param string $alias
+     * @return FrontendInterface
+     */
+    public function getFrontendService(string $alias):FrontendInterface;
 }

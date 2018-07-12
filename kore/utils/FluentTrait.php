@@ -98,7 +98,7 @@ trait FluentTrait
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->prepareArray($this->data);
     }

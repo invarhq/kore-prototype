@@ -18,12 +18,11 @@ class LayoutBridgeBundle extends Bundle
 {
     public function getContainerExtension()
     {
-        return new DependencyInjection\LayoutBridgeBundleExtension();
+        return new DependencyInjection\LayoutBridgeExtension();
     }
 
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new DependencyInjection\LayoutHtmlElementCompilerPass());
-        $container->addCompilerPass(new DependencyInjection\LayoutJsonElementCompilerPass());
+        $container->addCompilerPass(new DependencyInjection\LayoutElementCompilerPass());
     }
 }

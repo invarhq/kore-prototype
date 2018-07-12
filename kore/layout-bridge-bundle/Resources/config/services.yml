@@ -67,25 +67,20 @@ services:
       - 'kore.layout.config.supplier'
 
   kore.layout.html.processor:
-    class: Kore\Layout\Processor\Processor
+    class: Kore\Layout\Processor\ProcessorHtml
     public: true
     arguments:
-      - '@kore.layout.html.element.factory'
+      - '@kore.layout.element.factory'
       - '@kore.layout.debug'
 
   kore.layout.json.processor:
-    class: Kore\Layout\Processor\Processor
+    class: Kore\Layout\Processor\ProcessorJson
     public: true
     arguments:
-      - '@kore.layout.json.element.factory'
+      - '@kore.layout.element.factory'
       - '@kore.layout.debug'
 
-  kore.layout.html.element.factory:
-    class: Kore\Layout\Element\Factory\Factory
-    arguments:
-      - '@service_container'
-
-  kore.layout.json.element.factory:
+  kore.layout.element.factory:
     class: Kore\Layout\Element\Factory\Factory
     arguments:
       - '@service_container'

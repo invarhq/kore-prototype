@@ -17,8 +17,11 @@ use Symfony\Component\Config\FileLocator;
  * Class LayoutBridgeBundleExtension
  * @package Kore\LayoutSymfonyBridge\DependencyInjection
  */
-class LayoutBridgeBundleExtension extends Extension
+class LayoutBridgeExtension extends Extension
 {
+    const FRONTEND_SERVICE_TAG = 'kore.layout.frontend';
+    const BACKEND_SERVICE_TAG = 'kore.layout.backend';
+
     /**
      * @param array $configs
      * @param ContainerBuilder $container
@@ -26,8 +29,10 @@ class LayoutBridgeBundleExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
-        $loader->load('layout/layout.yml');
+
+        $layoutLoader = new LayoutYamlLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $layoutLoader->load(__DIR__ . '/../Resources/config/layout.yml');
     }
 }

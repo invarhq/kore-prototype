@@ -12,16 +12,17 @@ use Kore\Layout\Element\DataTransport\ElementData;
 use Kore\Layout\Element\DataTransport\PrivateData;
 use Kore\Layout\Element\DataTransport\PublicData;
 use Kore\Utils\FluentInterface;
+use Kore\Utils\Htmlable;
 
 /**
  * Interface FrontendInterface
  * @package Kore\Layout\Element\Frontend
  */
-interface FrontendInterface extends FluentInterface
+interface FrontendInterface extends FluentInterface, Htmlable
 {
     /**
      * @param ElementData $data
-     * @return mixed
+     * @return FrontendInterface
      */
-    public function process(ElementData $data);
+    public function setElementData(ElementData $data):FrontendInterface;
 }

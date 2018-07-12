@@ -1,4 +1,0 @@
----
-services:
-  kore.layout.element.default.backend:
-    class: Kore\Layout\Element\Backend\BackendDefault
