@@ -5,18 +5,15 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element\Frontend;
+namespace Kore\Layout\Element\Vue;
 
-use DOMDocument;
-use DOMElement;
-use DOMNode;
-use Kore\Layout\AssetResolverInterface;
+use Kore\Layout\Element\Frontend\DomAbstract;
 
 /**
  * Class HtmlDefault
  * @package Kore\Layout\Element\Frontend
  */
-class VueComponent extends DomAbstract
+class Frontend extends DomAbstract
 {
     /**
      * @return mixed|string

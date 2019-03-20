@@ -17,7 +17,8 @@
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "^4.1",
         "twig/twig": "^2.0",
-        "voku/arrayy": "^5.1"
+        "voku/arrayy": "^5.1",
+        "wasinger/bundle-asset-provider-bundle": "dev-master"
     },
     "require-dev": {
         "symfony/dotenv": "^4.1",
@@ -36,7 +37,8 @@
             "Kore\\Layout\\": "kore/layout",
             "Kore\\LayoutSymfonyBridge\\": "kore/layout-symfony-bundle",
             "Kore\\LayoutPugSymfonyBridge\\": "kore/layout-symfony-bundle-pug",
-            "Kore\\LayoutTwigSymfonyBridge\\": "kore/layout-symfony-bundle-twig"
+            "Kore\\LayoutTwigSymfonyBridge\\": "kore/layout-symfony-bundle-twig",
+            "Kore\\LayoutVueBundle\\": "kore/layout-vue-bundle"
         }
     },
     "autoload-dev": {

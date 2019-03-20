@@ -34,9 +34,9 @@ elements:
 
   vue_component:
     backend:
-      class: Kore\Layout\Element\Backend\VueComponent
+      class: Kore\Layout\Element\Vue\Backend
     frontend:
-      class: Kore\Layout\Element\Frontend\VueComponent
+      class: Kore\Layout\Element\Vue\Frontend
       arguments:
         - '@kore.layout.element.template_processor_resolver'
       calls:

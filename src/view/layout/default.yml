@@ -7,11 +7,6 @@ document: # Root Element
   _styles:
     - 'build/appCss.css'
   content:
-    hello:
-      _type: vue_component
-    main:
-      _type: template
-      _template: content.pug
   footer:
     _type: template
     _template: footer.phtml

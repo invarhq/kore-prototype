@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+var WebpackShellPlugin = require('webpack-shell-plugin');
 
 Encore
     // the project directory where compiled assets will be stored

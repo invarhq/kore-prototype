@@ -11,12 +11,12 @@ use Psr\Container\ContainerInterface;
  * @package App\Controller
  * @method ContainerInterface getContainer()
  */
-class DefaultController extends ControllerAbstract
+class HomeController extends ControllerAbstract
 {
     public function index()
     {
         $layoutConfig = $this->get('kore.layout.config');
-        $layoutConfig->load();
+        $layoutConfig->load('home');
 
         $processor = $this->get('kore.layout.html.processor');
 

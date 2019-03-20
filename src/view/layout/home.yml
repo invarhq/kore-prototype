@@ -1,0 +1,8 @@
+---
+document:
+  content:
+    hello:
+      _type: vue_component
+    main:
+      _type: template
+      _template: home.pug

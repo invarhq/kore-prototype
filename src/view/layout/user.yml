@@ -1,0 +1,5 @@
+---
+document:
+  content:
+    user-profile:
+      _type: vue_component

@@ -5,15 +5,17 @@
  * terms of the MIT license.
  */
 
-namespace Kore\Layout\Element\Backend;
+namespace Kore\Layout\Element\Vue;
 
+use Kore\Layout\Element\Backend\BackendAbstract;
+use Kore\Layout\Element\Backend\BackendInterface;
 use Kore\Layout\Element\DataTransport\ElementData;
 
 /**
  * Class BackendDefault
  * @package Kore\Layout\Element\Backend
  */
-class VueComponent extends BackendAbstract
+class Backend extends BackendAbstract
 {
     /**
      * @param ElementData $data
